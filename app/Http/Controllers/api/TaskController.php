@@ -37,7 +37,6 @@ class TaskController extends Controller
         $task->assignee = $request->input('assignee');
         $task->save();
         return new TaskResourse($task);
-
     }
 
     /**
