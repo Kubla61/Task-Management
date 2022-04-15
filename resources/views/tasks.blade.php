@@ -1,6 +1,10 @@
 <div class="" style="display:flex;">
     <div>
-        New <br>
+        New  
+        <a href="/add">
+            <button>Add Task</button>
+        </a><br> 
+
         @foreach($tasksNew as $data) 
             -----------------------------
             <div>
@@ -9,9 +13,26 @@
             <div>
                 Description: {{ $data['description'] }}
             </div> 
-            <div>
-                Assigneed To: {{ $data['assignee'] }}
-            </div> 
+
+            @foreach($allUsers as $usersData)
+                @if($usersData->id == $data['assignee'])
+                    <div>
+                        Assigneed to: {{ $usersData['username'] }}
+                    </div>
+                @else
+                    <div>
+                        Assigneed to: Noone
+                    </div>
+                @endif
+            @endforeach
+
+            <a href="{{ route('getSingleTasks', $data['id']) }}">
+                <button>View Task</button>
+            </a><br> 
+
+            {{Form::open(array('route' => array('deleteTask', $data['id']), 'method' => 'delete'))}}
+                {{Form::submit('Delete')}}
+            {{Form::close()}}
         @endforeach
     </div>
 
@@ -25,9 +46,18 @@
             <div>
                 Description: {{ $data['description'] }}
             </div> 
-            <div>
-                Assigneed To: {{ $data['assignee'] }}
-            </div> 
+
+            @foreach($allUsers as $usersData)
+                @if($usersData->id == $data['assignee'])
+                    <div>
+                        Assigneed To: {{ $usersData['username'] }}
+                    </div>
+                @else
+                    <div>
+                        Assigneed to: Noone
+                    </div>
+                @endif
+            @endforeach
         @endforeach
     </div>
 
@@ -41,9 +71,18 @@
             <div>
                 Description: {{ $data['description'] }}
             </div> 
-            <div>
-                Assigneed To: {{ $data['assignee'] }}
-            </div> 
+
+            @foreach($allUsers as $usersData)
+                @if($usersData->id == $data['assignee'])
+                    <div>
+                        Assigneed To: {{ $usersData['username'] }}
+                    </div>
+                @else
+                    <div>
+                        Assigneed to: Noone
+                    </div>
+                @endif
+            @endforeach
         @endforeach
     </div>
 
@@ -57,9 +96,18 @@
             <div>
                 Description: {{ $data['description'] }}
             </div> 
-            <div>
-                Assigneed To: {{ $data['assignee'] }}
-            </div> 
+
+            @foreach($allUsers as $usersData)
+                @if($usersData->id == $data['assignee'])
+                    <div>
+                        Assigneed To: {{ $usersData['username'] }}
+                    </div>
+                @else
+                    <div>
+                        Assigneed to: Noone
+                    </div>
+                @endif
+            @endforeach
         @endforeach
     </div>
 </div>

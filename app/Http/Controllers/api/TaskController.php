@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Task as TaskResourse;
@@ -17,8 +18,18 @@ class TaskController extends Controller
     public function index()
     {
         //get retrive all tasks records
-        $tasks = Task::all();
-        return New TaskResourse($tasks);
+        // $tasks = Task::all();
+        // return New TaskResourse($tasks);
+
+        $data = [
+            'tasksNew' => Task::where('status', '0')->get(),
+            'tasksInProgress' => Task::where('status', '1')->get(),
+            'tasksOnReview' => Task::where('status', '2')->get(),
+            'tasksCompleted' => Task::where('status', '3')->get(),
+            'allUsers' => User::all(),
+        ];
+        
+        return view('tasks', $data);
     }
 
     /**
@@ -36,7 +47,7 @@ class TaskController extends Controller
         $task->status = $request->input('status');
         $task->assignee = $request->input('assignee');
         $task->save();
-        return new TaskResourse($task);
+        return redirect(route('getTasks'));
     }
 
     /**
@@ -49,7 +60,27 @@ class TaskController extends Controller
     {
         //get specific task record by id
         $task = Task::findOrFail($id);
-        return new TaskResourse($task);
+
+        $data = [
+            'task' => $task,
+            'assignedTo' => User::where('id', $task['assignee'])->first(),
+        ];
+        // return new TaskResourse($task);
+
+        return view('tasks.task', $data);
+    }
+
+    public function updateForm(Request $request, $id)
+    {
+        //show update form
+        $task = Task::findOrFail($id);
+
+        $data = [
+            'task' => $task,
+            'assignedTo' => User::where('id', $task['assignee'])->first(),
+        ];
+        
+        return view('tasks.edit', $data);
     }
 
     /**
@@ -71,6 +102,7 @@ class TaskController extends Controller
         return new TaskResourse($task);
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -82,7 +114,8 @@ class TaskController extends Controller
         //delete specific product record by id
         $task = Task::findOrFail($id);
         if($task->delete()) {
-            return new TaskResourse($task);
+            // return new TaskResourse($task);
+            return redirect(route('getTasks'));
         }
     }
 }
