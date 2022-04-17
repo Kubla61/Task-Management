@@ -17,8 +17,11 @@ class UserController extends Controller
     public function index()
     {
         //get all users
-        $users = User::all();
-        return New UserResourse($users);
+        $data = [
+            'allUsers' => User::all(),
+        ];
+        
+        return view('users.allUsers', $data);
     }
 
     /**

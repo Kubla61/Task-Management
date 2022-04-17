@@ -28,7 +28,7 @@ Route::get('tasks/{id}/edit', [TaskController::class, 'updateForm'])->name('edit
 Route::put('tasks/{id}/update', [TaskController::class, 'update'])->name('updateTask');
 Route::delete('tasks/{id}', [TaskController::class, 'destroy'])->name('deleteTask');
 
-Route::get('users', [UserController::class, 'index']);
+Route::get('users', [UserController::class, 'index'])->name('getUsers');
 Route::get('users/{id}', [UserController::class, 'show']);
 Route::post('user', [UserController::class, 'store']);
 Route::put('users/{id}', [UserController::class, 'update']);
