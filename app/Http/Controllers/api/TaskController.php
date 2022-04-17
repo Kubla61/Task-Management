@@ -32,6 +32,15 @@ class TaskController extends Controller
         return view('tasks', $data);
     }
 
+    public function addForm($status) {
+        $data = [
+            'allUsers' => User::all(),
+            'status' => $status
+        ];
+
+        return view('tasks.add', $data);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -60,10 +69,17 @@ class TaskController extends Controller
     {
         //get specific task record by id
         $task = Task::findOrFail($id);
+        $assignedUser = User::where('id', $task['assignee'])->first();
+        
+        if($assignedUser) {
+            $userName = $assignedUser->username;
+        } else {
+            $userName = 'No one';
+        }
 
         $data = [
             'task' => $task,
-            'assignedTo' => User::where('id', $task['assignee'])->first(),
+            'assignedTo' => $userName,
         ];
         // return new TaskResourse($task);
 
@@ -78,6 +94,7 @@ class TaskController extends Controller
         $data = [
             'task' => $task,
             'assignedTo' => User::where('id', $task['assignee'])->first(),
+            'allUsers' => User::all(),
         ];
         
         return view('tasks.edit', $data);
@@ -99,7 +116,13 @@ class TaskController extends Controller
         $task->status = $request->input('status');
         $task->assignee = $request->input('assignee');
         $task->save();
-        return new TaskResourse($task);
+
+        $data = [
+            'task' => $task,
+            'assignedTo' => User::where('id', $task['assignee'])->first(),
+        ];
+        
+        return redirect(route('getSingleTasks', $id));
     }
 
 

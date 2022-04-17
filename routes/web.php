@@ -18,7 +18,3 @@ use App\Http\Controllers\TasksController;
 //     return view('tasks');
 // });
 
-// Route::get('/', 'App\Http\Controllers\TasksController@getTasks')->name('getTasks');
-Route::get('/add', 'App\Http\Controllers\TasksController@addForm');
-Route::get('/edit', 'App\Http\Controllers\TasksController@addForm');
-

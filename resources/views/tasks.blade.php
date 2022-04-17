@@ -1,7 +1,7 @@
 <div class="" style="display:flex;">
     <div>
         New  
-        <a href="/add">
+        <a href="/api/add/0">
             <button>Add Task</button>
         </a><br> 
 
@@ -14,30 +14,44 @@
                 Description: {{ $data['description'] }}
             </div> 
 
-            @foreach($allUsers as $usersData)
-                @if($usersData->id == $data['assignee'])
-                    <div>
-                        Assigneed to: {{ $usersData['username'] }}
-                    </div>
-                @else
-                    <div>
-                        Assigneed to: Noone
-                    </div>
-                @endif
-            @endforeach
+            @if($data['assignee'])
+                <div>
+                    Assigneed To: 
 
-            <a href="{{ route('getSingleTasks', $data['id']) }}">
-                <button>View Task</button>
-            </a><br> 
+                    @foreach($allUsers as $usersData)
+                        @if($usersData->id == $data['assignee'])
+                            "{{ $usersData['username'] }}"
+                        @endif
+                    @endforeach
+                </div>
+            @else
+                <div>
+                    Assigneed to: "No one"
+                </div>
+            @endif
 
-            {{Form::open(array('route' => array('deleteTask', $data['id']), 'method' => 'delete'))}}
-                {{Form::submit('Delete')}}
-            {{Form::close()}}
+            <div>
+                <a href="{{ route('getSingleTasks', $data['id']) }}">
+                    <button>View Task</button>
+                </a>
+
+                <a href="{{ route('editTask', $data['id']) }}">
+                    <button>Update</button>
+                </a>
+
+                {{Form::open(array('route' => array('deleteTask', $data['id']), 'method' => 'delete'))}}
+                    {{Form::submit('Delete')}}
+                {{Form::close()}}
+            </div>
         @endforeach
     </div>
 
     <div>
-        In Progress <br>
+        In Progress 
+        <a href="/api/add/1">
+            <button>Add Task</button>
+        </a><br> 
+
         @foreach($tasksInProgress as $data) 
             -----------------------------
             <div>
@@ -47,22 +61,43 @@
                 Description: {{ $data['description'] }}
             </div> 
 
-            @foreach($allUsers as $usersData)
-                @if($usersData->id == $data['assignee'])
-                    <div>
-                        Assigneed To: {{ $usersData['username'] }}
-                    </div>
-                @else
-                    <div>
-                        Assigneed to: Noone
-                    </div>
-                @endif
-            @endforeach
+            @if($data['assignee'])
+                <div>
+                    Assigneed To: 
+
+                    @foreach($allUsers as $usersData)
+                        @if($usersData->id == $data['assignee'])
+                            "{{ $usersData['username'] }}"
+                        @endif
+                    @endforeach
+                </div>
+            @else
+                <div>
+                    Assigneed to: "Noone"
+                </div>
+            @endif
+
+            <div>
+                <a href="{{ route('getSingleTasks', $data['id']) }}">
+                    <button>View Task</button>
+                </a>
+                <a href="{{ route('editTask', $data['id']) }}">
+                    <button>Update</button>
+                </a>
+
+                {{Form::open(array('route' => array('deleteTask', $data['id']), 'method' => 'delete'))}}
+                    {{Form::submit('Delete')}}
+                {{Form::close()}}
+            </div>
         @endforeach
     </div>
 
     <div>
-        On Review <br>
+        On Review 
+        <a href="/api/add/2">
+            <button>Add Task</button>
+        </a><br> 
+
         @foreach($tasksOnReview as $data) 
             -----------------------------
             <div>
@@ -72,22 +107,44 @@
                 Description: {{ $data['description'] }}
             </div> 
 
-            @foreach($allUsers as $usersData)
-                @if($usersData->id == $data['assignee'])
-                    <div>
-                        Assigneed To: {{ $usersData['username'] }}
-                    </div>
-                @else
-                    <div>
-                        Assigneed to: Noone
-                    </div>
-                @endif
-            @endforeach
+            @if($data['assignee'])
+                <div>
+                    Assigneed To: 
+
+                    @foreach($allUsers as $usersData)
+                        @if($usersData->id == $data['assignee'])
+                            "{{ $usersData['username'] }}"
+                        @endif
+                    @endforeach
+                </div>
+            @else
+                <div>
+                    Assigneed to: "Noone"
+                </div>
+            @endif
+
+            <div>
+                <a href="{{ route('getSingleTasks', $data['id']) }}">
+                    <button>View Task</button>
+                </a>
+
+                <a href="{{ route('editTask', $data['id']) }}">
+                    <button>Update</button>
+                </a>
+
+                {{Form::open(array('route' => array('deleteTask', $data['id']), 'method' => 'delete'))}}
+                    {{Form::submit('Delete')}}
+                {{Form::close()}}
+            </div>
         @endforeach
     </div>
 
     <div>
-        Completed <br>
+        Completed
+        <a href="/api/add/3">
+            <button>Add Task</button>
+        </a><br> 
+
         @foreach($tasksCompleted as $data) 
             -----------------------------
             <div>
@@ -97,17 +154,35 @@
                 Description: {{ $data['description'] }}
             </div> 
 
-            @foreach($allUsers as $usersData)
-                @if($usersData->id == $data['assignee'])
-                    <div>
-                        Assigneed To: {{ $usersData['username'] }}
-                    </div>
-                @else
-                    <div>
-                        Assigneed to: Noone
-                    </div>
-                @endif
-            @endforeach
+            @if($data['assignee'])
+                <div>
+                    Assigneed To: 
+
+                    @foreach($allUsers as $usersData)
+                        @if($usersData->id == $data['assignee'])
+                            "{{ $usersData['username'] }}"
+                        @endif
+                    @endforeach
+                </div>
+            @else
+                <div>
+                    Assigneed to: "Noone"
+                </div>
+            @endif
+
+            <div>
+                <a href="{{ route('getSingleTasks', $data['id']) }}">
+                    <button>View Task</button>
+                </a>
+
+                <a href="{{ route('editTask', $data['id']) }}">
+                    <button>Update</button>
+                </a>
+
+                {{Form::open(array('route' => array('deleteTask', $data['id']), 'method' => 'delete'))}}
+                    {{Form::submit('Delete')}}
+                {{Form::close()}}
+            </div>
         @endforeach
     </div>
 </div>

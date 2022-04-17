@@ -1,21 +1,33 @@
 {{Form::open(array('route' => 'addTask'))}}
-    Title: {{Form::text('name')}}
-    Description: {{Form::text('description')}}
+    <div>
+        Title: {{Form::text('name')}}
+    </div>
 
-    <select name="status">
-        <option value="0">New</option>
-        <option value="1">In Progress</option>
-        <option value="2">On Review</option>
-        <option value="3">Complete</option>
-    </select>
+    <div>
+        Description: {{Form::text('description')}}
+    </div>
+    
+    <div>
+        Status: 
 
-    <select name="assignee">
-        if(@isset($allUsers))
+        <select name="status">
+            <option value="0" {{($status == 0) ? 'selected' : ''}}>New</option>
+            <option value="1" {{($status == 1) ? 'selected' : ''}}>In Progress</option>
+            <option value="2" {{($status == 2) ? 'selected' : ''}}>On Review</option>
+            <option value="3" {{($status == 3) ? 'selected' : ''}}>Complete</option>
+        </select>
+    </div>
+
+    <div>
+        Assigne to:
+
+        <select name="assignee">
+            <option value="0">No one</option>
             @foreach($allUsers as $data)
                 <option value="{{$data->id}}">{{$data->username}}</option>
             @endforeach
-        @endif
-    </select>
+        </select>
+    </div>
 
     {{Form::submit()}}
 {{Form::close()}}
