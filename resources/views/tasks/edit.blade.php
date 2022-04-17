@@ -29,11 +29,12 @@
     </div>
 
     {{Form::submit('Save')}}
-    <a href="{{route('getSingleTasks', $task['id'])}}">
-        <button>
-            Cancel
-        </button>
-    </a>
 {{Form::close()}}
+
+<a href="{{route('getSingleTasks', $task['id'])}}">
+    <button>
+        Cancel
+    </button>
+</a>
 
     

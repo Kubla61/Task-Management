@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
                 'email' => 'test_user_'. $i .'@gmail.com',
                 'password' => Hash::make('password'),
                 'role' => rand(0,2),
+                'created_at' => date('Y-m-d H:i:s')
             ]);
         }
 
@@ -37,6 +38,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'This is test task '. $i,
                 'description' => 'This is test description '. $i,
                 'status' => rand(0,3),
+                'created_at' => date('Y-m-d H:i:s')
             ]);
         }
         

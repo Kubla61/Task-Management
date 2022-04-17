@@ -29,7 +29,8 @@ Route::put('tasks/{id}/update', [TaskController::class, 'update'])->name('update
 Route::delete('tasks/{id}', [TaskController::class, 'destroy'])->name('deleteTask');
 
 Route::get('users', [UserController::class, 'index'])->name('getUsers');
-Route::get('users/{id}', [UserController::class, 'show']);
+Route::get('users/{id}', [UserController::class, 'show'])->name('getSingleUser');
 Route::post('user', [UserController::class, 'store']);
-Route::put('users/{id}', [UserController::class, 'update']);
-Route::delete('users/{id}', [UserController::class, 'destroy']);
+Route::get('users/{id}/edit', [UserController::class, 'editUser'])->name('editUser');
+Route::put('users/{id}', [UserController::class, 'update'])->name('updateUser');
+Route::delete('users/{id}', [UserController::class, 'destroy'])->name('deleteUser');

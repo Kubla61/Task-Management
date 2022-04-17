@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\User as UserResourse;
+use Hash;
 
 class UserController extends Controller
 {
@@ -51,8 +52,20 @@ class UserController extends Controller
     public function show($id)
     {
         //get specific task record by id
-        $user = User::findOrFail($id);
-        return new UserResourse($user);
+        $data = [
+            'user' => User::findOrFail($id),
+        ];
+        
+        return view('users.singleUser', $data);
+    }
+
+    public function editUser(Request $request, $id)
+    {
+        $data = [
+            'user' => User::findOrFail($id),
+        ];
+        
+        return view('users.edit', $data);
     }
 
     /**
@@ -64,14 +77,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-         //update a user values
-         $user = User::findOrFail($id);
-         $user->username = $request->input('username');
-         $user->email = $request->input('email');
-         $user->password = $request->input('password');
-         $user->role = $request->input('role');
-         $user->save();
-         return new UserResourse($user);
+        //update a user values
+        $user = User::findOrFail($id);
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        $user->role = $request->input('role');
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
+
+        $data = [
+            'user' => $user
+        ];
+        
+        return redirect(route('getSingleUser', $id));
     }
 
     /**
@@ -85,7 +103,7 @@ class UserController extends Controller
         //delete specific user record by id
         $user = User::findOrFail($id);
         if($user->delete()) {
-            return new UserResourse($user);
+            return redirect(route('getUsers'));
         }
     }
 }
