@@ -29,7 +29,7 @@ class TaskController extends Controller
             'allUsers' => User::all(),
         ];
         
-        return view('tasks', $data);
+        return view('tasks.allTasks', $data);
     }
 
     public function addForm($status) {
@@ -83,7 +83,7 @@ class TaskController extends Controller
         ];
         // return new TaskResourse($task);
 
-        return view('tasks.task', $data);
+        return view('tasks.singleTask', $data);
     }
 
     public function updateForm(Request $request, $id)

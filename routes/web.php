@@ -14,7 +14,7 @@ use App\Http\Controllers\TasksController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('tasks');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
