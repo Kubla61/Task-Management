@@ -3,10 +3,13 @@ This is simple CRUD RESTful API task and user management system, without front-e
 After installation user will be able to Add, View, Update, Delete Tasks and Users. 
 Search tasks by status and by assignee.
 
+ Project is written on Laravel Framework 8.83.8 and PHP 7.4.26.
+
 ## Instalation
 To setup this project basic knowledge of composer, PHP/Laravel and local enviroment is required. 
 
 - [Download and install composer on your machine](https://getcomposer.org).
+- Download And Install [xampp](https://xamppguide.com/xampp-7-4-26/) Or [MAMP](https://www.mamp.info/en/mamp/windows/). For windows xampp is recommended, For macOS MAMP is required. Please keep in mind project is written on PHP 7.4.26. 
 
 
 
