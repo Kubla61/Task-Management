@@ -21,6 +21,7 @@ To setup this project basic knowledge of git, composer, PHP/Laravel and local en
 - Now run ``` php artisan serve ``` in terminal, copy/click the link provided in termianl.
 
 ## Detailed description of the endpoints
+General: 
 - GET method "/" returns welcome.blade.php, which acts as home page for the project.
 - All the API endpoints are under "middleware" group in this case to be able to use validations.
 
