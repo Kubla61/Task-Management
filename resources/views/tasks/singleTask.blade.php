@@ -18,10 +18,18 @@
     @elseif($task['status'] == 3)
         Completed
     @endif
-
 </div>
+
 <div>
     Assigneed to: {{$assignedTo}}
+</div>
+
+<div>
+    Date of creation: {{$task['created_at']}}
+</div>
+
+<div>
+    Date of last modification: {{$task['updated_at']}}
 </div>
 
 <a href="{{route('editTask', $task['id'])}}">

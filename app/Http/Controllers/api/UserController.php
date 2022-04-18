@@ -24,6 +24,11 @@ class UserController extends Controller
         
         return view('users.allUsers', $data);
     }
+    
+    public function addForm()
+    {
+        return view('users.add');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -34,13 +39,20 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //create new user
+        $validated = $request->validate([
+            'username' => 'required|max:255',
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
         $user = new User();
         $user->username = $request->input('username');
         $user->email = $request->input('email');
-        $user->password = $request->input('password');
+        $user->password = Hash :: make($request->input('password'));
         $user->role = $request->input('role');
         $user->save();
-        return new UserResourse($user);
+
+        return redirect(route('getSingleUser', $user->id));
     }
 
     /**
@@ -78,16 +90,17 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //update a user values
+        $validated = $request->validate([
+            'username' => 'required|max:255',
+            'email' => 'required',
+        ]);
+
         $user = User::findOrFail($id);
         $user->username = $request->input('username');
         $user->email = $request->input('email');
         $user->role = $request->input('role');
         $user->password = Hash::make($request->input('password'));
         $user->save();
-
-        $data = [
-            'user' => $user
-        ];
         
         return redirect(route('getSingleUser', $id));
     }

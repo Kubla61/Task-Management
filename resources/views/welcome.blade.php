@@ -13,3 +13,11 @@
         </button>
     </a>
 </div>
+
+<div>
+    <a href="{{route('search')}}">
+        <button>
+            Search Tasks
+        </button>
+    </a>
+</div>

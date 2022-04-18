@@ -1,3 +1,14 @@
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 {{Form::open(array('route' => array('updateUser', $user['id']), 'method' => 'put'))}}
     <div>
         Username: {{Form::text('username', $user['username'])}}
@@ -8,7 +19,7 @@
     </div>
 
     <div>
-        Password: {{Form::text('password')}}
+        Password: {{Form::password('password')}}
     </div>
 
     <div>

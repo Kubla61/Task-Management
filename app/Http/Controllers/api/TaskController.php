@@ -47,9 +47,13 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //create new task record
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'description' => 'required',
+        ]);
+
         $task = new Task();
         $task->name = $request->input('name');
         $task->description = $request->input('description');
@@ -59,14 +63,40 @@ class TaskController extends Controller
         return redirect(route('getTasks'));
     }
 
+    public function search() {
+        $data = [
+            'allUsers' => User::all(),
+        ];
+
+        return view('tasks.search', $data);
+    }
+
+    public function searchResult(Request $request) {
+        if($request->input('status') != '4' && $request->input('assignee') == 0) {
+            $tasks = Task::where('status', $request->input('status'))->get();
+        } elseif($request->input('status') == '4' && $request->input('assignee') != 0) {
+            $tasks = Task::where('assignee', $request->input('assignee'))->get();
+        } else {
+            $tasks = Task::where([['assignee', $request->input('assignee')], ['status', $request->input('status')]])->get();
+        }
+
+        $data = [
+            'tasks' => $tasks,
+            'allUsers' => User::all(),
+            'status' => $request->input('status'),
+            'assignee' => User::where('id', $request->input('assignee'))->first(),
+        ];
+
+        return view('tasks.search', $data);
+    }
+    
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //get specific task record by id
         $task = Task::findOrFail($id);
         $assignedUser = User::where('id', $task['assignee'])->first();
@@ -86,8 +116,7 @@ class TaskController extends Controller
         return view('tasks.singleTask', $data);
     }
 
-    public function updateForm(Request $request, $id)
-    {
+    public function updateForm($id) {
         //show update form
         $task = Task::findOrFail($id);
 
@@ -107,8 +136,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //update a specific task record
         $task = Task::findOrFail($id);
         $task->name = $request->input('name');
@@ -132,8 +160,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //delete specific product record by id
         $task = Task::findOrFail($id);
         if($task->delete()) {

@@ -1,6 +1,12 @@
 <div>
     <div>
-        <a href="">
+        <a href="/">
+            <button>
+                Home
+            </button>
+        </a>
+        
+        <a href="{{route('addUser')}}">
             <button>
                 Create New User
             </button>

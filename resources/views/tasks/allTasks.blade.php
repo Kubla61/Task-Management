@@ -1,7 +1,14 @@
+<a href="/">
+    <button>
+        Home
+    </button>
+</a>
+<br><br>
+
 <div class="" style="display:flex;">
     <div>
         New  
-        <a href="/api/add/0">
+        <a href="{{route('addForm', 0)}}">
             <button>Add Task</button>
         </a><br> 
 
@@ -48,7 +55,7 @@
 
     <div>
         In Progress 
-        <a href="/api/add/1">
+        <a href="{{route('addForm', 1)}}">
             <button>Add Task</button>
         </a><br> 
 
@@ -94,7 +101,7 @@
 
     <div>
         On Review 
-        <a href="/api/add/2">
+        <a href="{{route('addForm', 2)}}">
             <button>Add Task</button>
         </a><br> 
 
@@ -141,7 +148,7 @@
 
     <div>
         Completed
-        <a href="/api/add/3">
+        <a href="{{route('addForm', 3)}}">
             <button>Add Task</button>
         </a><br> 
 

@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use DB;
-use Str;
 use Hash;
 
 class DatabaseSeeder extends Seeder
@@ -38,7 +37,8 @@ class DatabaseSeeder extends Seeder
                 'name' => 'This is test task '. $i,
                 'description' => 'This is test description '. $i,
                 'status' => rand(0,3),
-                'created_at' => date('Y-m-d H:i:s')
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
             ]);
         }
         
