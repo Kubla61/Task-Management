@@ -1,8 +1,6 @@
 ## About Project
-This is simple CRUD RESTful API task and user management system. 
-Functionalities Project offers: 
+This is simple CRUD RESTful API task and user management system, without front-end. After installation user will be able to Add, View, Update, Delete Tasks and Users. Search tasks by status and by assignee.
 
-- [Real-time event broadcasting].
 ## Instalation
 
 - [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
