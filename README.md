@@ -29,9 +29,10 @@ Tasks:
 - GET method "tasks" uses TaskControllers default "index" function to return all tasks.
 - GET method "tasks/{id}" uses TaskControllers default "show" function to return a single task.
 - GET method "addTask/{status}  uses TaskControllers custom "addForm" function to return a blade with form/inputs to add new task.
+- POST method "task" uses TaskControllers default "store" function to insert data in db.
 - GET method "search" uses TaskControllers custom "search" function to return a blade with search form/inputs.
 - POST method "searchResult" uses TaskControllers custom "searchResult" function to return results of search and redirect to "search" route with this data.
-- POST method "task" uses TaskControllers default "store" function to insert data in db.
+- GET method "tasks/{id}/edit" uses TaskControllers custom "updateForm" function to return a blade with form/inputs.
 - PUT method "tasks/{id}/update" uses TaskControllers default "update" function to update data in db.
 - DELETE method "tasks/{id}" uses TaskControllers default "destroy" function to delete single data in db.
 
