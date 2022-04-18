@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //get all users
+        //retrive all users
         $data = [
             'allUsers' => User::all(),
         ];
@@ -27,6 +27,7 @@ class UserController extends Controller
     
     public function addForm()
     {
+        //return blade with form for adding user 
         return view('users.add');
     }
 
@@ -38,13 +39,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //create new user
+        //validate username, email and password when creating user
         $validated = $request->validate([
             'username' => 'required|max:255',
             'email' => 'required',
             'password' => 'required',
         ]);
 
+        //creating new record in user table
         $user = new User();
         $user->username = $request->input('username');
         $user->email = $request->input('email');
@@ -63,7 +65,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //get specific task record by id
+        //get specific user record by id
         $data = [
             'user' => User::findOrFail($id),
         ];
@@ -71,8 +73,9 @@ class UserController extends Controller
         return view('users.singleUser', $data);
     }
 
-    public function editUser(Request $request, $id)
+    public function editUser($id)
     {
+        //return blade to edit single users
         $data = [
             'user' => User::findOrFail($id),
         ];
@@ -89,12 +92,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //update a user values
+        //validate username and email while updating single record in db
         $validated = $request->validate([
             'username' => 'required|max:255',
             'email' => 'required',
         ]);
 
+        //update a user values in db
         $user = User::findOrFail($id);
         $user->username = $request->input('username');
         $user->email = $request->input('email');

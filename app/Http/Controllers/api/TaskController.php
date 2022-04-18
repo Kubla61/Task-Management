@@ -17,9 +17,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //get retrive all tasks records
-        // $tasks = Task::all();
-        // return New TaskResourse($tasks);
+        //retrive all tasks with users
 
         $data = [
             'tasksNew' => Task::where('status', '0')->get(),
@@ -33,6 +31,8 @@ class TaskController extends Controller
     }
 
     public function addForm($status) {
+        //show blade to add new user
+
         $data = [
             'allUsers' => User::all(),
             'status' => $status
@@ -48,12 +48,13 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //create new task record
+        //validate name and description when adding new task
         $validated = $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
         ]);
 
+        //create new task record
         $task = new Task();
         $task->name = $request->input('name');
         $task->description = $request->input('description');
@@ -64,6 +65,7 @@ class TaskController extends Controller
     }
 
     public function search() {
+        //return blade with search form
         $data = [
             'allUsers' => User::all(),
         ];
@@ -72,6 +74,7 @@ class TaskController extends Controller
     }
 
     public function searchResult(Request $request) {
+        //search task by it's status or assignee or both
         if($request->input('status') != '4' && $request->input('assignee') == 0) {
             $tasks = Task::where('status', $request->input('status'))->get();
         } elseif($request->input('status') == '4' && $request->input('assignee') != 0) {
@@ -164,7 +167,6 @@ class TaskController extends Controller
         //delete specific product record by id
         $task = Task::findOrFail($id);
         if($task->delete()) {
-            // return new TaskResourse($task);
             return redirect(route('getTasks'));
         }
     }
