@@ -4,6 +4,11 @@ After installation user will be able to Add, View, Update, Delete Tasks and User
 Search tasks by status and by assignee.
 
 ## Instalation
+To setup this project basic knowledge of composer, PHP/Laravel and local enviroment is required. 
+
+- [Download and install composer on your machine](https://getcomposer.org).
+
+
 
 - [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
