@@ -21,9 +21,10 @@ To setup this project basic knowledge of git, composer, PHP/Laravel and local en
 - Now run ``` php artisan serve ``` in terminal, copy/click the link provided in termianl.
 
 ## Detailed description of the endpoints
-Tasks: 
 - GET method "/" returns welcome.blade.php, which acts as home page for the project.
 - All the API endpoints are under "middleware" group in this case to be able to use validations.
+
+Tasks: 
 - GET method "tasks" uses TaskControllers default "index" function to return all tasks.
 - GET method "tasks/{id}" uses TaskControllers default "show" function to return a single task.
 - GET method "addTask/{status}  uses TaskControllers custom "addForm" function to return a blade with form/inputs to add new task.
@@ -32,3 +33,12 @@ Tasks:
 - POST method "task" uses TaskControllers default "store" function to insert data in db.
 - PUT method "tasks/{id}/update" uses TaskControllers default "update" function to update data in db.
 - DELETE method "tasks/{id}" uses TaskControllers default "destroy" function to delete single data in db.
+
+Users: 
+- GET method "users" uses UserController default "index" function to return all users.
+- GET method "users/{id}" uses UserController default "show" function to return a single user.
+- GET method "addUser" uses UserController custom "addForm" function to return a blade with form/inputs to add new user.
+- POST method "user" uses UserController default "store" function to insert data in db.
+- GET method "users/{id}/edit"  uses UserController custom "editUser" function to return a blade with form/inputs to edit user.
+- PUT method "users/{id}" uses UserController default "update" function to update data in db.
+- DELETE method "users/{id}" uses UserController default "destroy" function to delete single data in db.
